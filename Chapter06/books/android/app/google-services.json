@@ -1,0 +1,204 @@
+{
+  "project_info": {
+    "project_number": "231625352134",
+    "firebase_url": "https://boanproject-7bff5.firebaseio.com",
+    "project_id": "boanproject-7bff5",
+    "storage_bucket": "boanproject-7bff5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231625352134:android:45bf7fbd35d64afef208c7",
+        "android_client_info": {
+          "package_name": "com.example.books"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231625352134-tqam3sjaf68r7fa0dnt0g6prvqjhlvcl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.books",
+            "certificate_hash": "fcddc7d39a1de1059919a6ebc3ca245568948af4"
+          }
+        },
+        {
+          "client_id": "231625352134-5bnd8320eenpqicht9t3kbe77iasbp3c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.books",
+            "certificate_hash": "9d2d4d3641837523281e59ceb9813739ccc7e740"
+          }
+        },
+        {
+          "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUplzMdao8QVOJPxqVt3SeymST0CNDp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231625352134:android:b2fb0779396a0b51f208c7",
+        "android_client_info": {
+          "package_name": "com.example.booksreasley"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231625352134-rvnmuru0fitsstd2u0aru6pmk4rcuoo6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.booksreasley",
+            "certificate_hash": "fcddc7d39a1de1059919a6ebc3ca245568948af4"
+          }
+        },
+        {
+          "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUplzMdao8QVOJPxqVt3SeymST0CNDp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231625352134:android:90eb513246dbc969f208c7",
+        "android_client_info": {
+          "package_name": "com.example.flutteralltip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231625352134-0p6lg9st3up9usuk1443nbesffhegefb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutteralltip",
+            "certificate_hash": "fcddc7d39a1de1059919a6ebc3ca245568948af4"
+          }
+        },
+        {
+          "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUplzMdao8QVOJPxqVt3SeymST0CNDp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231625352134:android:211640777e71dbc4f208c7",
+        "android_client_info": {
+          "package_name": "com.example.flutterfirebasedbboan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231625352134-5lcm71vph8s823g0iv6g65dtg8cdu01d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.flutterfirebasedbboan",
+            "certificate_hash": "fcddc7d39a1de1059919a6ebc3ca245568948af4"
+          }
+        },
+        {
+          "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUplzMdao8QVOJPxqVt3SeymST0CNDp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:231625352134:android:809c8b1e13d9573cf208c7",
+        "android_client_info": {
+          "package_name": "com.reasley.sd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "231625352134-d6iilkbokf8da182rql0pnoiaqe7cp12.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.reasley.sd",
+            "certificate_hash": "80ded48574419f50bae4d1cbc864947502be05bf"
+          }
+        },
+        {
+          "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeUplzMdao8QVOJPxqVt3SeymST0CNDp0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "231625352134-93hbnki7hfechvoracfbljupufqknbla.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

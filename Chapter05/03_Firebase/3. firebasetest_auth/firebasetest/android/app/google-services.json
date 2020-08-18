@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "506724861745",
+    "firebase_url": "https://gasbugs-firebase.firebaseio.com",
+    "project_id": "gasbugs-firebase",
+    "storage_bucket": "gasbugs-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506724861745:android:f2b2413a590a4b7c625210",
+        "android_client_info": {
+          "package_name": "com.gasbugs.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506724861745-bilhs6jne51d245bpb119pn43fdb66j2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gasbugs.firebasetest",
+            "certificate_hash": "391dbfcbe7380d1d6c5e210193e822da05b49df5"
+          }
+        },
+        {
+          "client_id": "506724861745-16e69a6p5ll7f9ilvtp9rkiesrukski1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvmzxo_JfLViWE7EjlLGmm9dncdmB-ZN8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506724861745-16e69a6p5ll7f9ilvtp9rkiesrukski1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
