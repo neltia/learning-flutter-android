@@ -38,9 +38,6 @@ dependencies:
   # WebView
   webview_flutter: ^0.3.22+1
 
-  # Percent Bar
-  percent_indicator: ^2.1.5
-
   # Mics
   intl: ^0.16.1
   flutter_swiper: ^1.1.6

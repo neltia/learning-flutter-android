@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../WebView.dart';
 import 'Insert/BookPage.dart';
-import 'Insert/CartPage.dart';
 import 'Insert/SearchPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -51,23 +50,22 @@ class _HomePageState extends State<HomePage>
 
   Future<List> gets()async{
     String url = 'https://www.googleapis.com/youtube/v3/search?';
-    String query = 'q=%EB%B3%B4%EC%95%88%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8';
-    String key = '[your_key]';
+    String query = 'q=플러터';
+    String key = '[Your API Key]';
     String part = 'snippet';
     String maxResults = '7';
     String type = 'video';
 
     List jsonData = [];
 
-    url = '$url$query&$key&Y$part&$maxResults&$type';
+    url = '$url$query&key=$key&part=$part&maxResults=$maxResults&type=$type';
     await http.get(url, headers: {"Accept": "application/json"}).then((value){
       var data = json.decode(value.body);
       for (var c in data['items']) {
         jsonData.add(c);
       }
-
-      return jsonData;
     });
+    return jsonData;
   }
 
   @override
@@ -76,11 +74,11 @@ class _HomePageState extends State<HomePage>
       return FutureBuilder(
           future: gets(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            //해당 부분은 data를 아직 받아 오지 못했을때 실행되는 부분을 의미한다.
             if (snapshot.hasData == false) {
-              return CircularProgressIndicator();
+              return Center(
+                child: CircularProgressIndicator(),
+              );
             }
-            //error가 발생하게 될 경우 반환하게 되는 부분
             else if (snapshot.hasError) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -90,7 +88,6 @@ class _HomePageState extends State<HomePage>
                 ),
               );
             }
-            // 데이터를 정상적으로 받아오게 되면 다음 부분을 실행하게 되는 것이다.
             else {
               return Column(
                 children: [
@@ -118,50 +115,57 @@ class _HomePageState extends State<HomePage>
                         padding: EdgeInsets.all(10),
                         itemCount: snapshot.data.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Card(
-                              child: Container(
-                                margin: EdgeInsets.all(10),
-                                height: 90,
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: 150,
-                                      child: Image.network(snapshot.data[index]['snippet']['thumbnails']['medium']['url'],),
-                                    ),
-
-                                    SizedBox(
-                                      width: 14,
-                                    ),
-
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            snapshot.data[index]['snippet']['title'],
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                          Spacer(),
-                                          Text(
-                                            snapshot.data[index]['snippet']['channelTitle'],
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                          Text(
-                                            snapshot.data[index]['snippet']['publishTime'],
-                                            style: TextStyle(fontSize: 10),
-                                          ),
-                                        ],
+                          return GestureDetector(
+                            onTap: (){
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => WebViewPage(title: snapshot.data[index]['snippet']['title'], baseUrl: 'https://www.youtube.com/user/ngnicky1209',))
+                              );
+                            },
+                            child: Card(
+                                child: Container(
+                                  margin: EdgeInsets.all(10),
+                                  height: 90,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 150,
+                                        child: Image.network(snapshot.data[index]['snippet']['thumbnails']['medium']['url'],),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                // widget.books.documents[index]
-                              )
+
+                                      SizedBox(
+                                        width: 14,
+                                      ),
+
+                                      Expanded(
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot.data[index]['snippet']['title'],
+                                              style: TextStyle(
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            Spacer(),
+                                            Text(
+                                              snapshot.data[index]['snippet']['channelTitle'],
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                            Text(
+                                              snapshot.data[index]['snippet']['publishTime'],
+                                              style: TextStyle(fontSize: 10),
+                                            ),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                            )
                           );
                         }),
                   )
@@ -310,7 +314,7 @@ class _HomePageState extends State<HomePage>
                                   ),
                                   Text(widget.books.documents[index]['publisher']),
                                   Text(
-                                    '${widget.books.documents[index]['value']}원',
+                                    '${numberWithComma(widget.books.documents[index]['value'])}원',
                                     style: TextStyle(
                                         color: Colors.blue,
                                         fontSize: 18
@@ -321,7 +325,6 @@ class _HomePageState extends State<HomePage>
                             )
                           ],
                         ),
-                        // widget.books.documents[index]
                       )
                   ),
                 );
@@ -401,13 +404,14 @@ class _HomePageState extends State<HomePage>
                       children: <Widget>[
                         Text('보안프로젝트'),
                         Spacer(),
-                        Icon(Icons.add_alert),
                         SizedBox(
                           width: 15,
                         ),
                         IconButton(
                           icon: Icon(Icons.power_settings_new),
                           onPressed: () async{
+                            await FirebaseAuth.instance.signOut();
+                            Navigator.pushNamedAndRemoveUntil(context, '/signin', (route) => false);
                           },
                         )
                       ],
@@ -417,42 +421,24 @@ class _HomePageState extends State<HomePage>
                 Container(
                   height: 80,
                   child: Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                    'https://picsum.photos/id/237/200/300'
-                                  ),
-                                )
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Text('user name'),
-                              Text('user email', style: TextStyle(color: Color(0xFF4C4C4C)),)
-                            ],
-                          ),
-
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Spacer(),
-                          Icon(Icons.arrow_forward_ios, color: Colors.grey,)
-                        ],
+                    child: ListTile(
+                      leading: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: NetworkImage(
+                                  widget.user.photoUrl
+                              ),
+                            )
+                        ),
                       ),
-                    ),
+                      title: Text(widget.user.displayName),
+                      subtitle: Text(widget.user.email),
+                      trailing: Icon(Icons.arrow_forward_ios,),
+                    )
                   ),
                 ),
 
@@ -469,22 +455,44 @@ class _HomePageState extends State<HomePage>
                             child: Text('인프런/강의 추천', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),),
                           )
                       ),
-                      RaisedButton(
-                        child: Text("강의 목록 바로가기"),
-                        color: Colors.white,
-                        onPressed: (){
+                      ListTile(
+                        title: Text('IT인을 위한 ELK 통합로그시스템 구축과 활용'),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => WebViewPage(title: 'IT인을 위한 ELK 통합로그시스템 구축과 활용', baseUrl: 'https://www.inflearn.com/course/ELK-%ED%86%B5%ED%95%A9%EB%A1%9C%EA%B7%B8%EC%8B%9C%EC%8A%A4%ED%85%9C-IT%EB%B3%B4%EC%95%88',))
+                          );
+                        },
+                      ),
+                      ListTile(
+                        title: Text('iOS 모바일 앱 모의해킹 (입문자편)'),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => WebViewPage(title: 'iOS 모바일 앱 모의해킹 (입문자편)', baseUrl: 'https://www.inflearn.com/course/ios-%EB%AA%A8%EB%B0%94%EC%9D%BC%EC%95%B1-%EB%AA%A8%EC%9D%98%ED%95%B4%ED%82%B9-%EC%9E%85%EB%AC%B8',))
+                          );
+                        },
+                      ),
+                      ListTile(
+                        title: Text('플러터(Flutter) 앱 개발 입문부터 프로젝트 완성까지'),
+                        trailing: Icon(Icons.arrow_forward_ios),
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => WebViewPage(title: '플러터(Flutter) 앱 개발 입문부터 프로젝트 완성까지', baseUrl: 'https://www.inflearn.com/course/%ED%94%8C%EB%9F%AC%ED%84%B0-%EB%AA%A8%EB%B0%94%EC%9D%BC%EC%95%B1-%EC%9E%85%EB%AC%B8#',))
+                          );
                         },
                       ),
                       RaisedButton(
                         child: Text("강의 목록 바로가기"),
                         color: Colors.white,
                         onPressed: (){
-                        },
-                      ),
-                      RaisedButton(
-                        child: Text("강의 목록 바로가기"),
-                        color: Colors.white,
-                        onPressed: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => WebViewPage(title: '인프런 보안 프로젝트', baseUrl: 'https://www.inflearn.com/courses?s=%EB%B3%B4%EC%95%88%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8',))
+                          );
                         },
                       ),
                     ],
@@ -556,9 +564,6 @@ class _HomePageState extends State<HomePage>
         child: TextField(
           controller: nameHolder,
           autocorrect: true ,
-          onChanged: (text){
-            _keyword = text;
-          },
           decoration: InputDecoration(
             suffixIcon: Container(
                 width: 110,
@@ -571,11 +576,13 @@ class _HomePageState extends State<HomePage>
                           color: Colors.black
                       ),
                       onPressed: (){
+                        _keyword = nameHolder.text;
                         Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => SearchPage(_keyword, widget.books))
                         );
                         nameHolder.clear();
+                        _keyword = '';
                       },
                     ),
                   ],
@@ -641,9 +648,10 @@ Widget metting(BuildContext context, String title, String organizer,bool status,
             alignment: Alignment.topLeft,
             children: <Widget>[
               Image(
-                width: 170,
+                height: 80,
+                width: 300,
                 image: AssetImage(
-                  imageUrl
+                  imageUrl,
                 ),
               ),
               Container(
