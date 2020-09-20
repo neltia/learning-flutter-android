@@ -582,7 +582,6 @@ class _HomePageState extends State<HomePage>
                             MaterialPageRoute(builder: (context) => SearchPage(_keyword, widget.books))
                         );
                         nameHolder.clear();
-                        _keyword = '';
                       },
                     ),
                   ],
